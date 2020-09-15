@@ -17,12 +17,13 @@ mv agnoster.zsh-theme ~/.oh-my-zsh/themes/agnoster.zsh-theme
 mv .zshrc ~/.zshrc
 chsh -s /usr/bin/zsh
 
-# Install Docker pre-reqs
+# Install pre-reqs for all the things
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
     git \
+    make \
     gnupg-agent \
     software-properties-common -y
 
@@ -43,7 +44,11 @@ sudo usermod -aG docker $USER
 
 sudo systemctl enable docker
 
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
 # Install Go
 wget -c https://dl.google.com/go/go1.15.2.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
 echo -n 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
-mkdir ~/go/{bin,pkg,src} -p
+mkdir ~/Documents/GoDev/{bin,pkg,src} -p
