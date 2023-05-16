@@ -104,26 +104,55 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias nats="/Users/dgee/Documents/natscli/natscli/dist/nats_darwin_arm64/nats"
-
 export icloud=~/Library/Mobile\ Documents/com\~apple\~CloudDocs
+
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/$HOME/Documents/GoDev/bin
 export GOPATH=$HOME/Documents/GoDev/
-export PATH=$PATH:/Users/dgee/Documents/GoDev/bin/golint
+export PATH=$PATH:/Users/david/Documents/GoDev/bin/golint
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export PATH="$PATH:/Users/dgee/.nsccli/bin"
-export PATH="$PATH:/Users/dgee/Documents/mjml/node_modules/.bin"
-export PATH="$PATH:/Users/dgee/.cargo/bin"
-export PATH="$PATH:/Users/dgee/.nsccli/bin"
+export PATH="$PATH:/Users/david/.nsccli/bin"
+export PATH="$PATH:/Users/david/Documents/mjml/node_modules/.bin"
+export PATH="$PATH:/Users/david/.cargo/bin"
+export PATH="$PATH:/Users/david/.nsccli/bin"
 export TERM=xterm-256color
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 eval "$(starship init zsh)"
-export PATH="$PATH:/Users/dgee/.nsccli/bin"
-export EDITOR=vim
-export DENO_INSTALL="/Users/dgee/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-path+=("/Users/dgee/.local/bin")
+path+=("/Users/dgee/.nsccli/bin")
+
+
+# JINA_CLI_BEGIN
+
+## autocomplete
+if [[ ! -o interactive ]]; then
+    return
+fi
+
+compctl -K _jina jina
+
+_jina() {
+  local words completions
+  read -cA words
+
+  if [ "${#words}" -eq 2 ]; then
+    completions="$(jina commands)"
+  else
+    completions="$(jina completions ${words[2,-2]})"
+  fi
+
+  reply=(${(ps:
+:)completions})
+}
+
+ulimit -n 4096
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
