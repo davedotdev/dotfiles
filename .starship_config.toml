@@ -12,6 +12,12 @@ success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set
 [package]
 disabled = true
 
+[git_branch]
+symbol = ' '
+truncation_length = 4
+truncation_symbol = ''
+ignore_branches = ['master', 'main']
+
 [git_status]
 conflicted = '🏳'
 #ahead = '🏎💨'
@@ -31,8 +37,8 @@ behind = '⇣${count}'
 
 [aws]
 format = 'on [$symbol($profile )(\($region\) )]($style)'
-style = 'bold blue'
-symbol = ' '
+style = 'bold yellow'
+symbol = '󰸏 '
 
 [custom.nats]
 command = "printf '%s |\n' \"${NATS_CONTEXT:-$(head -n 1 \"${XDG_CONFIG_DIR:-$HOME/.config}/nats/context.txt\")}\""
@@ -42,4 +48,4 @@ symbol = "| [󱫱 ](#34A574)"
 style = "#34A574"
 
 [golang]
-symbol = " "
+symbol = "[ ](#00ADD8)"
